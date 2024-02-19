@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRW.STWR.RebelRealms:ForceHeroesCampaigns</title>
+    <script th:src="@{/js/jquery-3.6.1.min.js}"></script>
+    <script th:src="@{/js/register.js}"></script>
+</head>
+<body>
+	<form method="POST" th:action="@{/registerprocess}" id="register-form">
+		
+	    <label for="usertag">Usuario</label>
+	    <input type="text" id="usertag" name="usertag" placeholder="Nombre de usuario" required>
+	    
+	    <label for="password">Contraseña</label>
+	    <input type="text" id="password" name="password" placeholder="Contraseña" required>
+	    
+	    <label for="email">Email</label>
+	    <input type="text" id="email" name="email" placeholder="Email" required>
+	    
+		<label for="name">Nombre</label>
+	    <input type="text" id="name" name="name" placeholder="Nombre">
+	    
+	    <label for="firstSurName">Primer Apellido</label>
+	    <input type="text" id="firstSurName" name="firstSurName" placeholder="P. Apellido">
+	    
+	    <label for="secondSurName">Segundo Apellido</label>
+	    <input type="text" id="secondSurName" name="secondSurName" placeholder="S. Apellido">
+	    
+		<br>
+	    <button type="submit">Registrarse</button>
+
+	</form>
+</body>
+</html>

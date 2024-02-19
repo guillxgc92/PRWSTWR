@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRW.STWR.RebelRealms:ForceHeroesCampaigns</title>
+    <script th:src="@{/js/jquery-3.6.1.min.js}"></script>
+    <script th:src="@{/js/dynamicDropdown.js}"></script>
+</head>
+<body>
+	<header>
+        <h5>NUEVA CAMPAÑA</h5>
+    </header>
+	<div id="form-campaign">
+		<form th:action="@{/processFormCampaign}" method="POST" id="campaignForm">
+			
+			<label for="namecampaign">Nombre de campaña</label>
+            <input type="text" id="namecampaign" name="namecampaign">
+            
+            <label for="region">Galaxia</label>
+            <select name="galaxy" id="galaxy">
+                <option th:each="galaxy : ${listaGalaxias}" th:value="${galaxy.idGalaxy}" th:text="${galaxy.galaxyName}"></option>
+            </select>
+            
+            <label for="region">Region</label>
+            <select name="region" id="region">
+                <option th:each="region : ${listaRegiones}" th:value="${region.idRegion}" th:text="${region.regionName}"></option>
+            </select>
+            
+            <label for="planet">Planeta</label>
+            <select name="planet" id="planet">
+                <option th:each="planet : ${listaPlanetas}" th:value="${planet.idPlanet}" th:text="${planet.planetName}"></option>
+            </select>
+
+            <label for="territory">Territorio</label>
+            <select name="territory" id="territory">
+                <option th:each="territory : ${listaTerritorios}" th:value="${territory.idTerritory}" th:text="${territory.territoryName}"></option>
+            </select>
+            <button type="submit">Crear</button>
+		</form>
+	</div>
+    
+</body>
+</html>
