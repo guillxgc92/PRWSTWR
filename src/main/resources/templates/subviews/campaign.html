@@ -17,7 +17,7 @@
 			<label for="namecampaign">Nombre de campaña</label>
             <input type="text" id="namecampaign" name="namecampaign">
             
-            <label for="region">Galaxia</label>
+            <label for="galaxy">Galaxia</label>
             <select name="galaxy" id="galaxy">
                 <option th:each="galaxy : ${listaGalaxias}" th:value="${galaxy.idGalaxy}" th:text="${galaxy.galaxyName}"></option>
             </select>
@@ -36,7 +36,7 @@
             <select name="territory" id="territory">
                 <option th:each="territory : ${listaTerritorios}" th:value="${territory.idTerritory}" th:text="${territory.territoryName}"></option>
             </select>
-            <button type="submit">Crear</button>
+            <button type="button" id="register-campaign">Crear</button>
 		</form>
 	</div>
     

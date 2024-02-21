@@ -19,6 +19,7 @@ public class UsuarioService {
 		return usuarioRepository.findAll();
 	}
 	
+	@SuppressWarnings("null")
 	public Usuario insertUsuario(Usuario usuario) {
 		
 		return usuarioRepository.save(usuario);

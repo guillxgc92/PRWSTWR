@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import prw.stwr.model.RolUsuario;
 
 @Repository
-public interface RolUsuarioRepository extends JpaRepository<RolUsuario, Integer>{
+public interface RolUsuarioRepository extends JpaRepository<RolUsuario, Long>{
 	
 	
 }

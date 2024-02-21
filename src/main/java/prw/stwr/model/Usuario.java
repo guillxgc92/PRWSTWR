@@ -1,10 +1,14 @@
 package prw.stwr.model;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,9 +20,9 @@ public class Usuario {
 	@Column(name = "ID_USER_UST")
 	private long idUser;
 	
-	//a lo mejor hay que cambiar a OneToOne
-	@Column(name = "ID_ROL_UST")
-	private long idRolUser;
+	@ManyToOne
+	@JoinColumn(name = "ID_ROL_UST", referencedColumnName = "ID_ROL_RST")
+	private RolUsuario idRolUser; //CUANDO TENEMOS UNA FK HACEMOS REFERENCIA MEDIANTE EL OBJETO NO EL IDENTIFICADOR ASI NOS DEVUELVE EL OBJETO RELACIONADO COMPLETO DE LA BASE DE DATOS
 	
 	@Column(name = "USER_TAGNAME_UST")
 	private String usertag;
@@ -45,7 +49,7 @@ public class Usuario {
 		
 	}
 
-	public Usuario(long idUser, long idRolUser, String usertag, 
+	public Usuario(long idUser, RolUsuario idRolUser, String usertag, 
 				   String password, String name, String firstSurName,
 				   String secondSurName, String email, boolean activerow) {
 		this.idUser = idUser;
@@ -67,11 +71,11 @@ public class Usuario {
 		this.idUser = idUser;
 	}
 
-	public long getIdRolUser() {
+	public RolUsuario getIdRolUser() {
 		return idRolUser;
 	}
 
-	public void setIdRolUser(long idRolUser) {
+	public void setIdRolUser(RolUsuario idRolUser) {
 		this.idRolUser = idRolUser;
 	}
 

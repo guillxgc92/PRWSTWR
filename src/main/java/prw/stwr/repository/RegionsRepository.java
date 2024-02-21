@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import prw.stwr.model.Regions;
 
 @Repository
-public interface RegionsRepository extends JpaRepository<Regions, Integer>{
+public interface RegionsRepository extends JpaRepository<Regions, Long>{
 
 }

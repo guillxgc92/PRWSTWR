@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRW.STWR.RebelRealms:ForceHeroesCampaigns</title>
+    <title>PRW.STWR.Register</title>
     <script th:src="@{/js/jquery-3.6.1.min.js}"></script>
     <script th:src="@{/js/register.js}"></script>
 </head>
 <body>
+	
 	<form method="POST" th:action="@{/registerprocess}" id="register-form">
 		
 	    <label for="usertag">Usuario</label>
@@ -30,7 +31,13 @@
 	    
 		<br>
 	    <button type="submit">Registrarse</button>
+	    <button type="button"><a th:href="@{/login}">Volver</a></button>
 
 	</form>
+	<div id="message-confirm"></div>
+	<div id="message-redirect"></div>
+	
+	<div th:text="${mensajeuserTag}"></div><div th:text="${mensajepassword}"></div><div th:text="${mensajeemail}"></div>
+	<div th:text="${mensajename}"></div><div th:text="${mensajefirstSurName}"></div><div th:text="${mensajesecondSurName}"></div>
 </body>
 </html>

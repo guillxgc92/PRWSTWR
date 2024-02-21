@@ -25,7 +25,7 @@ public class Campaign {
 	@Column(name = "ACTIVEROW_CST")
 	private boolean activerow;
 	
-	@Column(name = "ID_CAMPAIGNMASTER_CST")
+	@Column(name = "ID_CAMPAIGNMASTER_CST") //ID USUARIO PROPIETARIO DE CAMPAÑA
 	private long idCampaignMaster;
 	
 	@Column(name = "ID_TERRITORY_CST")

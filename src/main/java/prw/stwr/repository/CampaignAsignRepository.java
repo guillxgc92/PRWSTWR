@@ -3,9 +3,9 @@ package prw.stwr.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import prw.stwr.model.Territory;
+import prw.stwr.model.CampaignAsign;
 
 @Repository
-public interface TerritoryRepository extends JpaRepository<Territory, Long>{
+public interface CampaignAsignRepository extends JpaRepository<CampaignAsign, Long>{
 
 }

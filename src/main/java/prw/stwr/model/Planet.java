@@ -32,7 +32,8 @@ public class Planet {
 		
 	}
 	
-	public Planet(long idPlanet, String planetName, String planetDescription, long idPlanetRegion, boolean activerow) {
+	public Planet(long idPlanet, String planetName, String planetDescription, 
+			long idPlanetRegion, boolean activerow) {
 		this.idPlanet = idPlanet;
 		this.planetName = planetName;
 		this.planetDescription = planetDescription;
