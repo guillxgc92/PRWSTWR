@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,24 +27,21 @@ public class Campaign {
 	@Column(name = "ACTIVEROW_CST")
 	private boolean activerow;
 	
-	@Column(name = "ID_CAMPAIGNMASTER_CST") //ID USUARIO PROPIETARIO DE CAMPAÑA
-	private long idCampaignMaster;
-	
-	@Column(name = "ID_TERRITORY_CST")
-	private long idCampaignTerritory;
+	@ManyToOne
+	@JoinColumn(name = "ID_USER_UST", referencedColumnName = "ID_USER_UST")
+	private Usuario idUserCampaign;
 	
 	public Campaign() {
 		
 	}
-	
+
 	public Campaign(long idCampaign, String campaignName, String campaignStory, boolean activerow,
-			long idCampaignMaster, long idCampaignTerritory) {
+			Usuario idUserCampaign) {
 		this.idCampaign = idCampaign;
 		this.campaignName = campaignName;
 		this.campaignStory = campaignStory;
 		this.activerow = activerow;
-		this.idCampaignMaster = idCampaignMaster;
-		this.idCampaignTerritory = idCampaignTerritory;
+		this.idUserCampaign = idUserCampaign;
 	}
 
 	public long getIdCampaign() {
@@ -77,19 +76,11 @@ public class Campaign {
 		this.activerow = activerow;
 	}
 
-	public long getIdCampaignMaster() {
-		return idCampaignMaster;
+	public Usuario getIdUserCampaign() {
+		return idUserCampaign;
 	}
 
-	public void setIdCampaignMaster(long idCampaignMaster) {
-		this.idCampaignMaster = idCampaignMaster;
-	}
-
-	public long getIdCampaignTerritory() {
-		return idCampaignTerritory;
-	}
-
-	public void setIdCampaignTerritory(long idCampaignTerritory) {
-		this.idCampaignTerritory = idCampaignTerritory;
+	public void setIdUserCampaign(Usuario idUserCampaign) {
+		this.idUserCampaign = idUserCampaign;
 	}
 }

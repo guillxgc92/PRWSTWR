@@ -1,43 +1,46 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
     <title>PRW.STWR.Register</title>
+    <link rel="stylesheet" th:href="@{/styles/login.css}">
     <script th:src="@{/js/jquery-3.6.1.min.js}"></script>
     <script th:src="@{/js/register.js}"></script>
 </head>
 <body>
-	
-	<form method="POST" th:action="@{/registerprocess}" id="register-form">
-		
-	    <label for="usertag">Usuario</label>
-	    <input type="text" id="usertag" name="usertag" placeholder="Nombre de usuario" required>
-	    
-	    <label for="password">Contraseña</label>
-	    <input type="text" id="password" name="password" placeholder="Contraseña" required>
-	    
-	    <label for="email">Email</label>
-	    <input type="text" id="email" name="email" placeholder="Email" required>
-	    
-		<label for="name">Nombre</label>
-	    <input type="text" id="name" name="name" placeholder="Nombre">
-	    
-	    <label for="firstSurName">Primer Apellido</label>
-	    <input type="text" id="firstSurName" name="firstSurName" placeholder="P. Apellido">
-	    
-	    <label for="secondSurName">Segundo Apellido</label>
-	    <input type="text" id="secondSurName" name="secondSurName" placeholder="S. Apellido">
-	    
-		<br>
-	    <button type="submit">Registrarse</button>
-	    <button type="button"><a th:href="@{/login}">Volver</a></button>
 
-	</form>
-	<div id="message-confirm"></div>
-	<div id="message-redirect"></div>
-	
-	<div th:text="${mensajeuserTag}"></div><div th:text="${mensajepassword}"></div><div th:text="${mensajeemail}"></div>
-	<div th:text="${mensajename}"></div><div th:text="${mensajefirstSurName}"></div><div th:text="${mensajesecondSurName}"></div>
+	<div id="form-container">
+		
+		<span th:if="${!#strings.isEmpty(usuarioRegistrado)}" th:text="${'Te has registrado con éxito. Usuario: ' + usuarioRegistrado.userName}"></span>
+		<form method="POST" th:action="@{/register}" id="register-form">
+			<h5 id="h5-register">REGISTRATE</h5>
+		    <label for="username">Usuario</label>
+		    <input type="text" id="username" name="username" placeholder="Nombre de usuario" required>
+		    <span th:text="${mensajeuserTag}"></span>
+		    <label for="password">Contraseña</label>
+		    <input type="password" id="password" name="password" placeholder="Contraseña" required>
+		    <span th:text="${mensajepassword}"></span>
+		    <label for="email">Email</label>
+		    <input type="email" id="email" name="email" placeholder="Email" required>
+		    <span th:text="${mensajeemail}"></span>
+			<label for="name">Nombre</label>
+		    <input type="text" id="name" name="name" placeholder="Nombre">
+		    <span th:text="${mensajename}"></span>
+		    <label for="firstSurName">Primer Apellido</label>
+		    <input type="text" id="firstSurName" name="firstSurName" placeholder="P. Apellido">
+		    <span th:text="${mensajefirstSurName}"></span>
+		    <label for="secondSurName">Segundo Apellido</label>
+		    <input type="text" id="secondSurName" name="secondSurName" placeholder="S. Apellido">
+			<span th:text="${mensajesecondSurName}"></span>
+		    <button type="submit" id="button-register" class="button-register">Registrarse</button>
+			<button type="button" id="button-back" class="button-back" onclick="window.location.href='/login'">Volver</button>
+			<span th:text="${errorMessage}"></span>
+			
+		</form>
+		
+	</div>
 </body>
 </html>

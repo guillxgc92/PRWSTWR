@@ -1,10 +1,16 @@
 package prw.stwr.model;
 
+
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,21 +28,25 @@ public class Regions {
 	@Column(name = "SYSTEM_DESCRIPTION_SST")
 	private String regionDescription;
 	
-	@Column(name = "ID_GALAXY_SST")
-	private long idGalaxyRegion;
+	@ManyToOne
+	@JoinColumn(name = "ID_GALAXY_SST", referencedColumnName = "ID_GALAXY_GST")
+	private Galaxy objGalaxy;
 	
 	@Column(name = "ACTIVEROW_SST")
 	private boolean activerow;
+	
+	@OneToMany(mappedBy = "objRegions")
+    private List<Planet> planets;
 	
 	public Regions() {
 		
 	}
 
-	public Regions(long idRegion, String regionName, String regionDescription, long idGalaxyRegion, boolean activerow) {
+	public Regions(long idRegion, String regionName, String regionDescription, Galaxy objGalaxy, boolean activerow) {
 		this.idRegion = idRegion;
 		this.regionName = regionName;
 		this.regionDescription = regionDescription;
-		this.idGalaxyRegion = idGalaxyRegion;
+		this.objGalaxy = objGalaxy;
 		this.activerow = activerow;
 	}
 
@@ -64,12 +74,12 @@ public class Regions {
 		this.regionDescription = regionDescription;
 	}
 
-	public long getIdGalaxyRegion() {
-		return idGalaxyRegion;
+	public Galaxy getIdGalaxyRegion() {
+		return objGalaxy;
 	}
 
-	public void setIdGalaxyRegion(long idGalaxyRegion) {
-		this.idGalaxyRegion = idGalaxyRegion;
+	public void setIdGalaxyRegion(Galaxy objGalaxy) {
+		this.objGalaxy = objGalaxy;
 	}
 
 	public boolean isActiverow() {
@@ -78,6 +88,14 @@ public class Regions {
 
 	public void setActiverow(boolean activerow) {
 		this.activerow = activerow;
+	}
+
+	public List<Planet> getPlanets() {
+		return planets;
+	}
+
+	public void setPlanets(List<Planet> planets) {
+		this.planets = planets;
 	}
 }
 

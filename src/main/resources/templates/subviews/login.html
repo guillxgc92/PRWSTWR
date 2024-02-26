@@ -1,32 +1,44 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRW.STWR.Register</title>
-    <script th:src="@{/js/jquery-3.6.1.min.js}"></script>
-    <script th:src="@{/js/register.js}"></script>
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    <title>PRW.STWR.Login</title>
+    <link rel="stylesheet" th:href="@{/styles/login.css}">
+
 </head>
-	<form method="POST">
+<body>
+	
+	<div id="form-container">
 		
-	    <label for="username">Usuario</label>
-	    <input type="text" id="username" name="username" placeholder="Nombre de usuario" required>
-	    
-	    <label for="password">Contraseña</label>
-	    <input type="text" id="password" name="password" placeholder="Contraseña" required>
-	    
-	    <div class="checkbox-container">
-	        <input type="checkbox" id="rememberMe" name="rememberMe">
-	        <label for="rememberMe">Recuerdame</label>
-	    </div>
-	    
-	    <button type="submit">Iniciar Sesión</button>
-	    <br>
-	    <a href="#">¿Olvidaste tu contraseña?</a>
-	    <br>
-	    <br>
-	    <p>¿No tienes cuenta? <a th:href="@{/register}" id="btn-register">Regístrate aquí.</a></p>
-	    <button type="button"><a th:href="@{/}">Volver</a></button>
-	</form>
+		<form method="POST" th:action="@{/login}">
+			<h5 id="h5-login">LOGIN</h5>
+			<div th:if="${param.error}" style="display: flex; color: rgb(216, 29, 29); justify-content: center; align-items: center;">
+			    <div class="alert alert-danger" style="margin: auto;">Email o Contraseña no válido/a</div>
+			</div>
+
+		    <label for="username">Usuario</label>
+		    <input type="text" id="username" name="username" placeholder="Nombre de usuario" required>
+		    
+		    <label for="password">Contraseña</label>
+		    <input type="password" id="password" name="password" placeholder="Contraseña" required>
+		    
+		    <div class="checkbox-container">
+		        <input type="checkbox" id="rememberMe" name="rememberMe">
+		        <label for="rememberMe">Recuerdame</label>
+		    </div>
+		    
+		    <button type="submit" style="margin-bottom: 1rem;">Iniciar Sesión</button>
+
+		    <a href="#">¿Olvidaste tu contraseña?</a>
+
+		    <p>¿No tienes cuenta? <a th:href="@{/register}" id="btn-register">Regístrate aquí.</a></p>
+		    <button type="button" onclick="window.location.href='/'">Volver</button>
+		</form>
+		
+	</div>
+	
 </body>
 </html>

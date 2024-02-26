@@ -1,10 +1,13 @@
 package prw.stwr.model;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,8 +25,9 @@ public class Planet {
 	@Column(name = "PLANET_DESCRIPTION_PST")
 	private String planetDescription;
 	
-	@Column(name = "ID_SYSTEM_PST")
-	private long idPlanetRegion;
+	@ManyToOne
+	@JoinColumn(name = "ID_SYSTEM_PST", referencedColumnName = "ID_SYSTEM_SST")
+	private Regions objRegions;
 	
 	@Column(name = "ACTIVEROW_PST")
 	private boolean activerow;
@@ -33,11 +37,11 @@ public class Planet {
 	}
 	
 	public Planet(long idPlanet, String planetName, String planetDescription, 
-			long idPlanetRegion, boolean activerow) {
+			Regions objRegions, boolean activerow) {
 		this.idPlanet = idPlanet;
 		this.planetName = planetName;
 		this.planetDescription = planetDescription;
-		this.idPlanetRegion = idPlanetRegion;
+		this.objRegions = objRegions;
 		this.activerow = activerow;
 	}
 
@@ -65,12 +69,12 @@ public class Planet {
 		this.planetDescription = planetDescription;
 	}
 
-	public long getIdPlanetRegion() {
-		return idPlanetRegion;
+	public Regions getIdPlanetRegion() {
+		return objRegions;
 	}
 
-	public void setIdPlanetRegion(long idPlanetRegion) {
-		this.idPlanetRegion = idPlanetRegion;
+	public void setIdPlanetRegion(Regions objRegions) {
+		this.objRegions = objRegions;
 	}
 
 	public boolean isActiverow() {
@@ -79,5 +83,21 @@ public class Planet {
 
 	public void setActiverow(boolean activerow) {
 		this.activerow = activerow;
+	}
+
+	public Regions getObjRegions() {
+		return objRegions;
+	}
+
+	public void setObjRegions(Regions objRegions) {
+		this.objRegions = objRegions;
+	}
+	
+	@Override
+	public String toString() {
+		return "Planeta{"+
+				"nombre= " + getPlanetName() +
+				", descripcion= " + getPlanetDescription() +
+				"}";
 	}
 }

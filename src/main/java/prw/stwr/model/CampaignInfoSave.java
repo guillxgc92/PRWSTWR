@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 //Gauardar información de las campañas y usuario segun identificadores
@@ -17,28 +19,35 @@ public class CampaignInfoSave {
 	@Column(name = "ID_CAMPAIGNTERRITORY_CST")
 	private long idCampaignSave;
 	
-	@Column(name = "ID_CAMPAIGNASIGN_CST")
-	private long idCampaignAsigned; //campaignasign_stwr ID_CAMPAIGNASIGN_CST
+	@ManyToOne
+	@JoinColumn(name = "ID_CAMPAIGNASIGN_CST", referencedColumnName = "ID_CAMPAIGNASIGN_CST")
+	private CampaignAsign idCampaignAsigned; //campaignasign_stwr ID_CAMPAIGNASIGN_CST
 	
-	@Column(name = "ID_TERRITORY_TST")
-	private long idTerritorySave;
+	@ManyToOne
+	@JoinColumn(name = "ID_TERRITORY_TST", referencedColumnName = "ID_TERRITORY_TST")
+	private Territory idTerritorySave;
 	
-	@Column(name = "ID_PLANET_PST")
-	private long idPlanetSave;
+	@ManyToOne
+	@JoinColumn(name = "ID_PLANET_PST", referencedColumnName = "ID_PLANET_PST")
+	private Planet idPlanetSave;
 	
-	@Column(name = "ID_SYSTEM_SST")
-	private long idRegionSave;
+	@ManyToOne
+	@JoinColumn(name = "ID_SYSTEM_SST", referencedColumnName = "ID_SYSTEM_SST")
+	private Regions idRegionSave;
 	
-	@Column(name = "ID_GALAXY_GST")
-	private long idGalaxySave;
+	@ManyToOne
+	@JoinColumn(name = "ID_GALAXY_GST", referencedColumnName = "ID_GALAXY_GST")
+	private Galaxy idGalaxySave;
 	
 	@Column(name = "ACTIVEROW_CAMPAIGNTERRITORY_CST")
 	private boolean activerow;
 	
-	public CampaignInfoSave() {}
+	public CampaignInfoSave() {
+		
+	}
 
-	public CampaignInfoSave(long idCampaignSave, long idCampaignAsigned, long idTerritorySave, long idPlanetSave,
-			long idRegionSave, long idGalaxySave, boolean activerow) {
+	public CampaignInfoSave(long idCampaignSave, CampaignAsign idCampaignAsigned, Territory idTerritorySave, Planet idPlanetSave,
+			Regions idRegionSave, Galaxy idGalaxySave, boolean activerow) {
 		this.idCampaignSave = idCampaignSave;
 		this.idCampaignAsigned = idCampaignAsigned;
 		this.idTerritorySave = idTerritorySave;
@@ -56,43 +65,43 @@ public class CampaignInfoSave {
 		this.idCampaignSave = idCampaignSave;
 	}
 
-	public long getIdCampaignAsigned() {
+	public CampaignAsign getIdCampaignAsigned() {
 		return idCampaignAsigned;
 	}
 
-	public void setIdCampaignAsigned(long idCampaignAsigned) {
+	public void setIdCampaignAsigned(CampaignAsign idCampaignAsigned) {
 		this.idCampaignAsigned = idCampaignAsigned;
 	}
 
-	public long getIdTerritorySave() {
+	public Territory getIdTerritorySave() {
 		return idTerritorySave;
 	}
 
-	public void setIdTerritorySave(long idTerritorySave) {
+	public void setIdTerritorySave(Territory idTerritorySave) {
 		this.idTerritorySave = idTerritorySave;
 	}
 
-	public long getIdPlanetSave() {
+	public Planet getIdPlanetSave() {
 		return idPlanetSave;
 	}
 
-	public void setIdPlanetSave(long idPlanetSave) {
+	public void setIdPlanetSave(Planet idPlanetSave) {
 		this.idPlanetSave = idPlanetSave;
 	}
 
-	public long getIdRegionSave() {
+	public Regions getIdRegionSave() {
 		return idRegionSave;
 	}
 
-	public void setIdRegionSave(long idRegionSave) {
+	public void setIdRegionSave(Regions idRegionSave) {
 		this.idRegionSave = idRegionSave;
 	}
 
-	public long getIdGalaxySave() {
+	public Galaxy getIdGalaxySave() {
 		return idGalaxySave;
 	}
 
-	public void setIdGalaxySave(long idGalaxySave) {
+	public void setIdGalaxySave(Galaxy idGalaxySave) {
 		this.idGalaxySave = idGalaxySave;
 	}
 

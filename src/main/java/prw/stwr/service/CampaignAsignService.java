@@ -12,6 +12,7 @@ public class CampaignAsignService {
 	@Autowired
 	private CampaignAsignRepository campaignAsignRepository;
 	
+	@SuppressWarnings("null")
 	public CampaignAsign addCampaignAsign(CampaignAsign campaignAsign) {
 		
 		return campaignAsignRepository.save(campaignAsign);

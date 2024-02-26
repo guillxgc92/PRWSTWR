@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import prw.stwr.model.Galaxy;
 
 @Repository
-public interface GalaxyRepository extends JpaRepository<Galaxy, Integer>{
-
+public interface GalaxyRepository extends JpaRepository<Galaxy, Long>{
+	
 }

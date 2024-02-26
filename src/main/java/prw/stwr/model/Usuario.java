@@ -1,12 +1,18 @@
 package prw.stwr.model;
 
 
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 import jakarta.persistence.Table;
@@ -25,7 +31,7 @@ public class Usuario {
 	private RolUsuario idRolUser; //CUANDO TENEMOS UNA FK HACEMOS REFERENCIA MEDIANTE EL OBJETO NO EL IDENTIFICADOR ASI NOS DEVUELVE EL OBJETO RELACIONADO COMPLETO DE LA BASE DE DATOS
 	
 	@Column(name = "USER_TAGNAME_UST")
-	private String usertag;
+	private String username;
 	
 	@Column(name = "USER_PASSWORD_UST")
 	private String password;
@@ -45,16 +51,23 @@ public class Usuario {
 	@Column(name = "ACTIVEROW_UST")
 	private boolean activerow;
 	
+	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)//Esto hará que Hibernate cargue la colección de roles de inmediato cuando se recupere el Usuario
+    @JoinTable(
+        name = "userrol_stwr", 
+        joinColumns = @JoinColumn(name = "ID_USER_URST"), 
+        inverseJoinColumns = @JoinColumn(name = "ID_ROL_URST"))
+    private Set<RolUsuario> roles;
+	
 	public Usuario() {
 		
 	}
 
-	public Usuario(long idUser, RolUsuario idRolUser, String usertag, 
+	public Usuario(long idUser, RolUsuario idRolUser, String username, 
 				   String password, String name, String firstSurName,
 				   String secondSurName, String email, boolean activerow) {
 		this.idUser = idUser;
 		this.idRolUser = idRolUser;
-		this.usertag = usertag;
+		this.username = username;
 		this.password = password;
 		this.name = name;
 		this.firstSurName = firstSurName;
@@ -79,12 +92,12 @@ public class Usuario {
 		this.idRolUser = idRolUser;
 	}
 
-	public String getUsertag() {
-		return usertag;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUsertag(String usertag) {
-		this.usertag = usertag;
+	public void setUsertag(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -134,4 +147,13 @@ public class Usuario {
 	public void setActiverow(boolean activerow) {
 		this.activerow = activerow;
 	}
+
+	public Set<RolUsuario> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<RolUsuario> roles) {
+		this.roles = roles;
+	}
+	
 }

@@ -12,6 +12,7 @@ public class CampaignInfoService {
 	@Autowired
 	private CampaignInfoSaveRepository campaignInfoSaveRepository;
 	
+	@SuppressWarnings("null")
 	public CampaignInfoSave addRegistroCampaign (CampaignInfoSave campaignInfoSave) {
 		
 		return campaignInfoSaveRepository.save(campaignInfoSave); //Guardar registro de IDs de campaña y "lugares"

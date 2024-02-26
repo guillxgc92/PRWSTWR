@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,8 +24,9 @@ public class Territory {
 	@Column(name = "TERRITORY_DESCRIPTION_TST")
 	private String territoryDescription;
 	
-	@Column(name = "ID_PLANET_TST")
-	private long idTerritoryPlanet;
+	@ManyToOne
+	@JoinColumn(name = "ID_PLANET_TST", referencedColumnName = "ID_PLANET_PST")
+	private Planet objPlanet;
 	
 	@Column(name = "ACTIVEROW_TST")
 	private boolean activerow;
@@ -35,12 +38,12 @@ public class Territory {
 		
 	}
 
-	public Territory(long idTerritory, String territoryName, String territoryDescription, long idTerritoryPlanet,
+	public Territory(long idTerritory, String territoryName, String territoryDescription, Planet objPlanet,
 			boolean activerow, String territoryHistory) {
 		this.idTerritory = idTerritory;
 		this.territoryName = territoryName;
 		this.territoryDescription = territoryDescription;
-		this.idTerritoryPlanet = idTerritoryPlanet;
+		this.objPlanet = objPlanet;
 		this.activerow = activerow;
 		this.territoryHistory = territoryHistory;
 	}
@@ -69,12 +72,12 @@ public class Territory {
 		this.territoryDescription = territoryDescription;
 	}
 
-	public long getIdTerritoryPlanet() {
-		return idTerritoryPlanet;
+	public Planet getIdTerritoryPlanet() {
+		return objPlanet;
 	}
 
-	public void setIdTerritoryPlanet(long idTerritoryPlanet) {
-		this.idTerritoryPlanet = idTerritoryPlanet;
+	public void setIdTerritoryPlanet(Planet objPlanet) {
+		this.objPlanet = objPlanet;
 	}
 
 	public boolean isActiverow() {

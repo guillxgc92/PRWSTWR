@@ -1,49 +1,41 @@
 
 $(document).ready(function(){
 	
-	$("#btn-login").on("click", function(){
-
-	
-	
-	});//CIERRE #btn-login
+	var csrfToken = $("meta[name='_csrf']").attr("content");
+    var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	
 	$("#register-form").on("submit", function(event){
 		
-		event.preventDefault(); // Evita que el formulario se envíe normalmente
-		
+		event.preventDefault(); 
 
 		var formData = {
-            usertag: $("#usertag").val(),
+            usertag: $("#username").val(),
             password: $("#password").val(),
             email: $("#email").val(),
             name: $("#name").val(),
             firstSurName: $("#firstSurName").val(),
             secondSurName: $("#secondSurName").val()
         }
-        
-        
+
 		$.ajax({
-			
-			url:'/registerprocess',
+			url:'/register',
 			method: 'POST',
+			beforeSend: function(xhr) {
+            	xhr.setRequestHeader(csrfHeader, csrfToken);
+            	console.log(csrfHeader, csrfToken);
+        	},
 		    data: formData,
 		    success: function (registroResult) {
-                     
-				$("#message-confirm").html('Te has registrado con éxito.');
-				
-				$("#message-redirect").html('Redirigiendo...');
-			    		
-			    console.log("objeto usuario: " + registroResult);
-			    
-			    setTimeout(function(){
-					window.location.href = '/';
-				}, 3000);
-			    //window.location.href = '/'; //reidireccion de ruta despues de enviar los datos
-			    //alert('Te has registrado con éxito.');
-		    },
-		    error: function () {
-		        $("#form-charge").html('<p>Error al enviar los datos</p>');
-		    }
+			    if (registroResult.error) {
+                    console.error("Error en el servidor:", registroResult.errorMessage);
+                } else {
+                    alert("Te has registrado con éxito.");
+                }
+            },
+		    error: function (xhr, status, error) {
+			   console.error("Error en la solicitud AJAX:", xhr.responseText);
+			   $("#form-charge").html('<p>Error al enviar los datos</p>');
+			}
 			
 		});//CIERRE PETICION ASYNC REGISTRO DE USUARIO
 		

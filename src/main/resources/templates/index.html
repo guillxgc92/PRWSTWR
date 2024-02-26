@@ -1,18 +1,26 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
     <title>PRW.STWR.RebelRealms:ForceHeroesCampaigns</title>
+    <link rel="stylesheet" th:href="@{/styles/index.css}">
     <script th:src="@{/js/jquery-3.6.1.min.js}"></script>
     <script th:src="@{/js/main.js}"></script>
 </head>
 <body>
+	<!--<div class="video-container">
+        <video autoplay muted loop id="videofondo">
+            <source th:src="@{/video/fondo.mp4}" type="video/mp4">
+        </video>-->
+    </div>
     <header>
         <div id="nav-container">
             <nav id="nav-menu">
                 <ul id="top-menu">
-                    <li><a th:href="@{/campaign}">Campaña</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/campaign}">Campaña</a></li>
                     <li><a href="#">Comunidad</a></li>
                     <li><a href="#">Información del juego</a></li>
                     <li><a th:href="@{/login}" id="btn-login">Iniciar Sesión</a></li>
