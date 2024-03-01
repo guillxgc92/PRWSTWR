@@ -11,19 +11,26 @@
     <script th:src="@{/js/main.js}"></script>
 </head>
 <body>
-	<!--<div class="video-container">
+	<div class="video-container">
         <video autoplay muted loop id="videofondo">
             <source th:src="@{/video/fondo.mp4}" type="video/mp4">
-        </video>-->
+        </video>
     </div>
     <header>
         <div id="nav-container">
             <nav id="nav-menu">
                 <ul id="top-menu">
-                    <li sec:authorize="isAuthenticated()"><a th:href="@{/campaign}">Campaña</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/character-creator}">Campaña</a></li>
                     <li><a href="#">Comunidad</a></li>
                     <li><a href="#">Información del juego</a></li>
-                    <li><a th:href="@{/login}" id="btn-login">Iniciar Sesión</a></li>
+                    <li>
+					    <div sec:authorize="isAuthenticated()">
+					        <a th:href="@{/account}" id="btn-login">Cuenta</a>
+					    </div>
+					    <div sec:authorize="!isAuthenticated()">
+					        <a th:href="@{/login}" id="btn-login">Iniciar Sesión</a>
+					    </div>
+					</li>
                 </ul>
             </nav>
         </div>

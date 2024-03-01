@@ -34,6 +34,19 @@ body {
     justify-content: center;
 }
 
+#h5-character {
+    margin: 0;
+    z-index: 1000;
+    display: flex;
+    width: 100%;
+    top: 0;
+    font-size: xx-large;
+    color: #eee;
+    text-shadow: 2px 2px 3px rgb(29, 29, 29);
+    text-align: center;
+    justify-content: center;
+}
+
 #form-campaign {
     display: flex;
     justify-content: center;
@@ -151,6 +164,6 @@ a:hover {
     margin-left: 8px;
 }
 
-.button-register {
+#register-campaign {
     margin-bottom: 1rem;
 }

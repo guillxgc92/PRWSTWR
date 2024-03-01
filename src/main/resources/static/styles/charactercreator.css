@@ -1,4 +1,3 @@
-
 *,
 *::before,
 *::after {
@@ -7,37 +6,23 @@
 
 body {
     margin: 0;
-	padding: 0;
+    padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     -ms-overflow-style: none;
     height: 100vh;
     overflow-y: hidden;
     display: flex;
-  	justify-content: center;
-  	align-items: center;
-  	background-image: url('/img/fondo-form.png');
-  	background-size: cover;  
+    justify-content: center;
+    align-items: center;
+    background-image: url('/img/fondo-campaign.jpg');
+    background-size: cover;  
     background-position: center; 
     background-repeat: no-repeat; 
     background-color: rgb(22, 22, 22);
 }
 
-#h5-login{
- 	margin: 0;
-    z-index: 1000;
-    display: flex;
-    width: 100%;
-    top: 0;
-    font-size: xx-large;
-    color: #eee;
-    text-shadow: 2px 2px 3px rgb(29, 29, 29);
-    text-align: center;
-    text-transform: uppercase;
-    justify-content: center;
-}
-
-#h5-register{
- 	margin: 0;
+#h5-character {
+    margin: 0;
     z-index: 1000;
     display: flex;
     width: 100%;
@@ -49,29 +34,29 @@ body {
     justify-content: center;
 }
 
-.form-container{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: auto;
-	height: auto;
-	min-width: 100%;
-	max-width: 100%;
+#form-campaign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    min-width: 50%;
+    max-width: 80%;
 }
 
 form {
-	width: 400px;
+    width: 400px;
     height: auto;
-    min-width: 100%;  
-    max-width: 100%; 
+    min-width: 100%;
+    max-width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;
     border-radius: 8px;
     backdrop-filter: blur(15px);
-	-webkit-box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.75);
-	-moz-box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.75);
-	box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.75);
-	z-index: 1000;
+    -webkit-box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.75);
+    z-index: 1000;
 }
 
 label {
@@ -79,11 +64,6 @@ label {
     margin-bottom: 8px;
     font-size: 14px;
     color: #eee;
-}
-
-form div label {
-	font-size: 14px;
-	color: #eee;
 }
 
 input {
@@ -94,6 +74,19 @@ input {
     border-radius: 4px;
     background-color: #333;
     color: #eee;
+}
+
+select {
+	width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #333;
+    color: #eee;
+    font-size: 14px;
+    height: 2.4rem; 
+    align-content: center;
 }
 
 button {
@@ -112,30 +105,30 @@ button:hover {
     background-color: #eee;
     color: rgb(22, 22, 22);
     -webkit-box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.75);
-	-moz-box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.75);
-	box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.75);
 }
 
 p {
-	color: #eee;
+    color: #eee;
     text-decoration: none;
     font-size: 14px;
 }
 
-.registro{
-	justify-self: right;
+.registro {
+    justify-self: right;
 }
 
 a {
-	font-weight: 400;
+    font-weight: 400;
     color: #eee;
     font-weight: 600;
     text-decoration: none;
     font-size: 14px;
 }
 
-input placeholder{
-	font-weight: 600;
+input::placeholder {
+    font-weight: 600;
 }
 
 a:hover {
@@ -158,6 +151,6 @@ a:hover {
     margin-left: 8px;
 }
 
-.button-register{
-	margin-bottom: 1rem;
+#register-character {
+    margin-bottom: 1rem;
 }

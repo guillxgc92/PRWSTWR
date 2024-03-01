@@ -37,6 +37,7 @@
                 <option th:each="territory : ${listaTerritorios}" th:value="${territory.idTerritory}" th:text="${territory.territoryName}"></option>
             </select>
             <button type="button" id="register-campaign">Crear</button>
+            <button type="button" id="button-back" class="button-back" onclick="window.location.href='/character-creator'">Volver</button>
 		</form>
 	</div>
     

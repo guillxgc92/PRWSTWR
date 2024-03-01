@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    <title>PRW.STWR.CharacterCreation</title>
+    <link rel="stylesheet" th:href="@{/styles/charactercreator.css}">
+    <script th:src="@{/js/jquery-3.6.1.min.js}"></script>
+    
+</head>
+<body>
+	<div id="form-character">
+		<form th:action="@{/processCharacterForm}" method="POST" id="characterForm">
+			<h5 id="h5-character">CREACIÓN DE PERSONAJE</h5>
+			<label for="charName">Nombre de personaje</label>
+            <input type="text" id="charName" name="charName">
+            
+            <label for="charRace">Raza</label>
+            <select name="charRace" id="charRaceSelect" required>
+                <option th:each="race : ${listaRazas}" th:value="${race.idCharacterRace}" th:text="${race.characterRaceName}"></option>
+            </select>
+            <label for="charRaceSkill">Raza</label>
+            <select name="charRaceSkill" id="charRaceSkillSelect" required>
+                <option th:each="raceSkill : ${listaSkillsRaza}" th:value="${raceSkill.idChRaceSkill}" th:text="${raceSkill.chRaceSkillName}"></option>
+            </select>
+            
+            <label for="charClass">Clase</label>
+			<select name="charClass" id="charClassSelect" required>
+		        <option th:each="class : ${listaClases}" th:value="${class.idChClass}" th:text="${class.chClassName}"></option>
+		 	</select>
+		 	
+		 	<label for="charClassSkill">Clase</label>
+			<select name="charClassSkill" id="charClassSkillSelect" required>
+		        <option th:each="classSkill : ${listaSkillsClase}" th:value="${classSkill.idChClassSkill}" th:text="${classSkill.chClassSkillName}"></option>
+		 	</select>
+
+            <button type="submit" id="register-character">Crear</button>
+            <button type="button" id="button-back" class="button-back" onclick="window.location.href='/'">Volver</button>
+		</form>
+	</div>
+    
+</body>
+</html>

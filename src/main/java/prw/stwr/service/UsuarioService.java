@@ -2,8 +2,8 @@ package prw.stwr.service;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -36,6 +36,7 @@ public class UsuarioService implements UserDetailsService{
 		return usuarioRepository.save(usuario);
 	}
 
+	//Buscar usuarios en BBD para el login 
 	@Override
 	@Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -57,5 +58,23 @@ public class UsuarioService implements UserDetailsService{
                 authorities
         );
     }
+	
+	//Hacer update de información de la cuenta del propio usuario
+	@SuppressWarnings("null")
+	@Transactional
+	public Usuario updateUsuario(Usuario usuario) {
+			
+			return usuarioRepository.save(usuario);
+	}
+	
+	public Usuario getUsuarioByUsername(String username) {
+		
+		return usuarioRepository.findByUsername(username);
+	}
+	
+	public Usuario getUsuarioById(Long idUser) {
+		
+		return usuarioRepository.findByIdUser(idUser);
+	}
 }
 
