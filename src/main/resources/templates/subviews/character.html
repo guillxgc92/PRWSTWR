@@ -11,9 +11,12 @@
     
 </head>
 <body>
+	
 	<div id="form-character">
 		<form th:action="@{/processCharacterForm}" method="POST" id="characterForm">
+			
 			<h5 id="h5-character">CREACIÓN DE PERSONAJE</h5>
+			
 			<label for="charName">Nombre de personaje</label>
             <input type="text" id="charName" name="charName">
             
@@ -21,17 +24,22 @@
             <select name="charRace" id="charRaceSelect" required>
                 <option th:each="race : ${listaRazas}" th:value="${race.idCharacterRace}" th:text="${race.characterRaceName}"></option>
             </select>
-            <label for="charRaceSkill">Raza</label>
-            <select name="charRaceSkill" id="charRaceSkillSelect" required>
-                <option th:each="raceSkill : ${listaSkillsRaza}" th:value="${raceSkill.idChRaceSkill}" th:text="${raceSkill.chRaceSkillName}"></option>
-            </select>
+            
+            <label for="charRaceSkill">Skill de Raza</label>
+			<select name="charRaceSkill" id="charRaceSkillSelect" required>
+			    <option th:each="skill : ${listaSkillsRaza}" 
+			            th:value="${skill.idChRaceSkill}" 
+			            th:text="${skill.chRaceSkillName}">
+			    </option>
+			</select>
+
             
             <label for="charClass">Clase</label>
 			<select name="charClass" id="charClassSelect" required>
 		        <option th:each="class : ${listaClases}" th:value="${class.idChClass}" th:text="${class.chClassName}"></option>
 		 	</select>
 		 	
-		 	<label for="charClassSkill">Clase</label>
+		 	<label for="charClassSkill">Skill de Clase</label>
 			<select name="charClassSkill" id="charClassSkillSelect" required>
 		        <option th:each="classSkill : ${listaSkillsClase}" th:value="${classSkill.idChClassSkill}" th:text="${classSkill.chClassSkillName}"></option>
 		 	</select>
@@ -40,6 +48,18 @@
             <button type="button" id="button-back" class="button-back" onclick="window.location.href='/'">Volver</button>
 		</form>
 	</div>
+	
+    <div id="img-character" th:style="'background-image: url(../img/character/char-' + ${listaRazas.get(0).getIdCharacterRace()} + '.jpg);'"></div>
     
+    <script>
+		
+	    document.getElementById('charRaceSelect').addEventListener('change', function() {
+	        // Obtengo el valor seleccionado
+	        var selectedRaceId = this.value;
+	        // Lo actualizo dinamicamente según la raza seleccionada
+	        document.getElementById('img-character').style.backgroundImage = 'url(../img/character/char-' + selectedRaceId + '.jpg)';
+	    });
+	</script>
+	
 </body>
 </html>

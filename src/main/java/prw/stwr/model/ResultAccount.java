@@ -9,6 +9,12 @@ public class ResultAccount {
 	
 	private List<String> errores = new ArrayList<String>();
 
+	public ResultAccount() {}
+	
+	public ResultAccount(String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}

@@ -12,8 +12,11 @@
 </head>
 <body>
 	<div id="form-campaign">
+		
 		<form th:action="@{/processFormCampaign}" method="POST" id="campaignForm">
+			
 			<h5 id="h5-campaign">NUEVA CAMPAÑA</h5>
+			
 			<label for="campaignName">Nombre de campaña</label>
             <input type="text" id="campaignName" name="campaignName">
             
@@ -24,7 +27,7 @@
             
             <label for="region">Region</label>
 			<select name="region" id="regionSelect" required>
-		        <option th:each="region : ${listaRegiones}" th:if="${region != null}" th:value="${region.idRegion}" th:text="${region.regionName}"></option>
+		        <option th:each="region : ${listaRegiones}" th:value="${region.idRegion}" th:text="${region.regionName}"></option>
 		 	</select>
 
            <label for="planet">Planeta</label>
@@ -36,10 +39,20 @@
             <select name="territory" id="territorySelect" required>
                 <option th:each="territory : ${listaTerritorios}" th:value="${territory.idTerritory}" th:text="${territory.territoryName}"></option>
             </select>
+            
             <button type="button" id="register-campaign">Crear</button>
             <button type="button" id="button-back" class="button-back" onclick="window.location.href='/character-creator'">Volver</button>
+            
 		</form>
 	</div>
+	
+	<div id="img-region" th:style="'background-image: url(../img/planet/region-' + ${listaRegiones.get(0).getIdRegion()} + '.jpg);'"></div>
     
+    <script>
+	    document.getElementById('regionSelect').addEventListener('change', function() {
+	        var selectedRegionId = this.value;
+	        document.getElementById('img-region').style.backgroundImage = 'url(../img/planet/region-' + selectedRegionId + '.jpg)';
+	    });	    
+	</script>
 </body>
 </html>

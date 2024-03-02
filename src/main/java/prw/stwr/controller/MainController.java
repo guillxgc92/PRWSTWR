@@ -1,29 +1,25 @@
 package prw.stwr.controller;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.NonNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpServletRequest;
 import prw.stwr.model.Campaign;
 import prw.stwr.model.CharacterClass;
 import prw.stwr.model.CharacterClassSkill;
@@ -36,9 +32,11 @@ import prw.stwr.model.Regions;
 import prw.stwr.model.ResultAccount;
 import prw.stwr.model.Territory;
 import prw.stwr.model.Usuario;
+import prw.stwr.repository.UsuarioRepository;
 import prw.stwr.service.CharacterClassService;
 import prw.stwr.service.CharacterClassSkillService;
 import prw.stwr.service.CharacterRaceService;
+import prw.stwr.service.CharacterRaceSkillRelationService;
 import prw.stwr.service.CharacterRaceSkillService;
 import prw.stwr.service.CharacterService;
 import prw.stwr.service.GalaxyService;
@@ -49,7 +47,7 @@ import prw.stwr.service.TerritoryService;
 import prw.stwr.service.UsuarioService;
 
 @Controller
-@SessionAttributes({"usuarioRegistrado"})
+@SessionAttributes({"charRace"})
 public class MainController {
 
 	
@@ -72,6 +70,7 @@ public class MainController {
 	@Autowired
 	private TerritoryService objTerritoryService;
 	
+	@SuppressWarnings("unused")
 	@Autowired
 	private CharacterService objCharacterService;
 	
@@ -87,6 +86,11 @@ public class MainController {
 	@Autowired
 	private CharacterClassSkillService objCharacterClassSkillService;
 	
+	@SuppressWarnings("unused")
+	@Autowired
+	private CharacterRaceSkillRelationService objcharacterRaceSkillRelationService;
+	
+
 	@GetMapping(value = {"/", "/index"})
 	public String index(Model model) {
 		
@@ -133,20 +137,10 @@ public class MainController {
 		List<Galaxy> listaGalaxies = objGalaxyService.getAll();
 		model.addAttribute("listaGalaxias", listaGalaxies);
 		
-		List<Regions> listaRegiones = new ArrayList<>();
-		
-		for(Galaxy galaxy: listaGalaxies) {
-			List<Regions> regionesDeLaGalaxia = objRegionsService.getRegionsByGalaxy(galaxy);
-	        listaRegiones.addAll(regionesDeLaGalaxia);
-		}
+		List<Regions> listaRegiones = objRegionsService.getAll();
 		model.addAttribute("listaRegiones", listaRegiones);
 
-		List<Planet> listaPlanetas = new ArrayList<>();
-		
-		for(Regions region: listaRegiones) {
-			List<Planet> planetasPorRegiones = objPlanetService.getPlanetsByRegion(region);
-			listaPlanetas.addAll(planetasPorRegiones);
-		}
+		List<Planet> listaPlanetas = objPlanetService.getAll();
 		model.addAttribute("listaPlanetas", listaPlanetas);
 		
 		List<Territory> listaTerritory = objTerritoryService.getAll();
@@ -163,16 +157,15 @@ public class MainController {
 	    
 	    return registroCampaign;
 	}
-
 	
 	@GetMapping(value = "/character-creator")
 	public String characterview(Model model) {
-		
+
 		List<CharacterRace> listaRazas = objCharacterRaceService.getAll();
 		model.addAttribute("listaRazas", listaRazas);
 		
 		List<CharacterRaceSkill> listaSkillsRaza = objCharacterRaceSkillService.getAll(); //Cambiar a que seleccione segun idCharacterRace
-		model.addAttribute("listaSkillsRaza",listaSkillsRaza);
+		model.addAttribute("listaSkillsRaza", listaSkillsRaza);
 		
 		List<CharacterClass> listaClases = objCharacterClassService.getAll();
 		model.addAttribute("listaClases", listaClases);
@@ -185,80 +178,11 @@ public class MainController {
 	
 	@PostMapping(value = "/processCharacterForm", produces = "application/json")
 	@ResponseBody
-	public GameCharacter regCharacter(@RequestBody GameCharacter gameCharacter) {
+	public GameCharacter regCharacter(@RequestBody GameCharacter character, Model model) {
 		
-		return null;
-	}
-	
-	@PostMapping(value = "/updateuser", produces = "application/json")
-	@ResponseBody
-	public ResultAccount updateUser(@RequestBody Usuario updateUsuario, Model model) {
+	    
 		
-		ResultAccount resultAccount = new ResultAccount();
-		try {
-			Pattern userTagReg = Pattern.compile("[a-z0-9_-]{3,15}");
-			Pattern passwordReg = Pattern.compile("[a-zA-Z0-9(?=.*[!@#&()–[{}]:;',?/*~$^+=<>])]{8,32}");
-			Pattern emailReg = Pattern.compile("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
-			Pattern nameReg = Pattern.compile("[a-zA-ZÀ-ÿ\\u00f1\\u00d1 ]{0,32}|^$");
-			Pattern firstSurNameReg = Pattern.compile("[a-zA-ZÀ-ÿ\\u00f1\\u00d1]{0,32}|^$");
-			Pattern secondSurNameReg = Pattern.compile("[a-zA-ZÀ-ÿ\\u00f1\\u00d1]{0,32}|^$");
-			
-			String userTag = updateUsuario.getUsername();
-			String password = updateUsuario.getPassword();
-			String email = updateUsuario.getEmail();
-			String name = updateUsuario.getName();
-			String firstSurName = updateUsuario.getFirstSurName();
-			String secondSurName = updateUsuario.getSecondSurName();
-			
-			Matcher matcherUserTag = userTagReg.matcher(userTag);
-			Matcher matcherPassword = passwordReg.matcher(password);
-			Matcher matcherEmail = emailReg.matcher(email);
-			Matcher matcherName = nameReg.matcher(name);
-			Matcher matcherfirstSurName = firstSurNameReg.matcher(firstSurName);
-			Matcher matcherSecondSurname = secondSurNameReg.matcher(secondSurName);
-			
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			
-			if (!matcherUserTag.matches()) {
-				resultAccount.getErrores().add("Nombre de usuario no válido.");
-			}
-			if(!matcherPassword.matches()) {
-				resultAccount.getErrores().add("Contraseña no válida.");
-			}
-			if(!matcherEmail.matches()) {
-				resultAccount.getErrores().add("Email no válido.");
-			}
-			if(!matcherName.matches()) {
-				resultAccount.getErrores().add("Nombre no válido.");
-			}
-			if(!matcherfirstSurName.matches()) {
-				resultAccount.getErrores().add("Primer apellido no válido.");
-			}
-			if(!matcherSecondSurname.matches()) {
-				resultAccount.getErrores().add("Segundo apellido no válido.");
-			}
-			if(resultAccount.getErrores().size() == 0){
-				
-				Usuario usuarioActual = objUsuarioService.getUsuarioByUsername(userDetails.getUsername());
-				
-				usuarioActual.setEmail(email);
-				usuarioActual.setPassword(password);
-				usuarioActual.setName(name);
-				usuarioActual.setFirstSurName(firstSurName);
-				usuarioActual.setSecondSurName(secondSurName);
-				
-				//Insertar el registro de usuario en la tabla de usuarios.
-				@SuppressWarnings("unused")
-				Usuario nuevoUsuario = objUsuarioService.updateUsuario(usuarioActual);
-				System.out.println("usuario modificado: " + nuevoUsuario);
-				
-				resultAccount.setUsuario(usuarioActual);
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return resultAccount;
+		return character;
 	}
 	
 	@PostMapping(value = "/register", produces = "application/json")
@@ -328,5 +252,98 @@ public class MainController {
 			e.printStackTrace();
 		}
 		return resultAccount;
+	}
+	
+	
+	@PostMapping(value = "/updateuser", produces = "application/json")
+	@ResponseBody
+	public ResultAccount updateUser(@RequestBody Usuario updateUsuario, Model model) {
+		
+		ResultAccount resultAccount = new ResultAccount();
+		try {
+			Pattern userTagReg = Pattern.compile("[a-z0-9_-]{3,15}");
+			Pattern passwordReg = Pattern.compile("[a-zA-Z0-9(?=.*[!@#&()–[{}]:;',?/*~$^+=<>])]{8,32}");
+			Pattern emailReg = Pattern.compile("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
+			Pattern nameReg = Pattern.compile("[a-zA-ZÀ-ÿ\\u00f1\\u00d1 ]{0,32}|^$");
+			Pattern firstSurNameReg = Pattern.compile("[a-zA-ZÀ-ÿ\\u00f1\\u00d1]{0,32}|^$");
+			Pattern secondSurNameReg = Pattern.compile("[a-zA-ZÀ-ÿ\\u00f1\\u00d1]{0,32}|^$");
+			
+			String userTag = updateUsuario.getUsername();
+			String password = updateUsuario.getPassword();
+			String email = updateUsuario.getEmail();
+			String name = updateUsuario.getName();
+			String firstSurName = updateUsuario.getFirstSurName();
+			String secondSurName = updateUsuario.getSecondSurName();
+			
+			Matcher matcherUserTag = userTagReg.matcher(userTag);
+			Matcher matcherPassword = passwordReg.matcher(password);
+			Matcher matcherEmail = emailReg.matcher(email);
+			Matcher matcherName = nameReg.matcher(name);
+			Matcher matcherfirstSurName = firstSurNameReg.matcher(firstSurName);
+			Matcher matcherSecondSurname = secondSurNameReg.matcher(secondSurName);
+			
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+			
+			if (!matcherUserTag.matches()) {
+				resultAccount.getErrores().add("Nombre de usuario no válido.");
+			}
+			if(!matcherPassword.matches()) {
+				resultAccount.getErrores().add("Contraseña no válida.");
+			}
+			if(!matcherEmail.matches()) {
+				resultAccount.getErrores().add("Email no válido.");
+			}
+			if(!matcherName.matches()) {
+				resultAccount.getErrores().add("Nombre no válido.");
+			}
+			if(!matcherfirstSurName.matches()) {
+				resultAccount.getErrores().add("Primer apellido no válido.");
+			}
+			if(!matcherSecondSurname.matches()) {
+				resultAccount.getErrores().add("Segundo apellido no válido.");
+			}
+			if(resultAccount.getErrores().size() == 0){
+				
+				Usuario usuarioActual = objUsuarioService.getUsuarioByUsername(userDetails.getUsername());
+
+				usuarioActual.setUsertag(userTag);
+				usuarioActual.setEmail(email.trim());
+				usuarioActual.setPassword(password.trim());
+				usuarioActual.setName(name.trim());
+				usuarioActual.setFirstSurName(firstSurName.trim());
+				usuarioActual.setSecondSurName(secondSurName.trim());
+				
+				@SuppressWarnings("unused")
+				Usuario nuevoUsuario = objUsuarioService.updateUsuario(usuarioActual);
+				System.out.println("usuario modificado: " + nuevoUsuario);
+				
+				resultAccount.setUsuario(usuarioActual);
+				
+				model.addAttribute("usuario", resultAccount);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return resultAccount;
+	}
+	
+	@PostMapping("/deleteUser")
+	public ResponseEntity<String> deleteuser(HttpServletRequest request) {
+	    try {
+	    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+			Usuario usuarioActual = objUsuarioService.getUsuarioByUsername(userDetails.getUsername());
+
+			if (userDetails.getUsername().equals(usuarioActual.getUsername())) {
+	            objUsuarioService.deleteUsuario(usuarioActual.getIdUser());
+	            request.getSession().invalidate();
+	        }
+
+	        return ResponseEntity.ok("Usuario eliminado con éxito.");
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\": \"" + e.getMessage() + "\"}");
+	    }
 	}
 }

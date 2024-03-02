@@ -15,7 +15,7 @@ body {
     display: flex;
   	justify-content: center;
   	align-items: center;
-  	background-image: url('/img/fondo-form.png');
+  	background-image: url('/img/background/fondo-form.png');
   	background-size: cover;  
     background-position: center; 
     background-repeat: no-repeat; 

@@ -24,8 +24,6 @@ public class CharacterRaceSkill {
 	
 	@Column(name = "ACTIVEROW_RSST")
 	private boolean activerow;
-
-	
 	
 	public long getIdChRaceSkill() {
 		return idChRaceSkill;

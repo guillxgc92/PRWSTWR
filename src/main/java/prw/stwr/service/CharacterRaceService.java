@@ -18,4 +18,5 @@ public class CharacterRaceService {
 		
 		return characterRaceRepository.findAll();
 	}
+	
 }

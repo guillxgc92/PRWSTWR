@@ -14,7 +14,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('/img/fondo-campaign.jpg');
+    background-image: url('/img/background/fondo-campaign.jpg');
     background-size: cover;  
     background-position: center; 
     background-repeat: no-repeat; 
@@ -34,7 +34,7 @@ body {
     justify-content: center;
 }
 
-#form-campaign {
+#form-character {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -153,4 +153,18 @@ a:hover {
 
 #register-character {
     margin-bottom: 1rem;
+}
+
+#img-character{
+	width: 350px;
+    height: 587px;
+	border-radius: 8px;
+    background-size: cover;  
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-color: rgb(22, 22, 22);
+    margin-left: 1rem;
+    -webkit-box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.75);
 }

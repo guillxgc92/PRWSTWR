@@ -15,7 +15,13 @@
 	<div id="form-container">
 		
 		<form method="POST" th:action="@{/updateuser}" id="account-form">
+						
+			<input type="hidden" name="idUsuario" th:value="${usuario.idUser}">
+			
 			<h5 id="h5-register" th:text="${#authentication.name}"></h5>
+		    
+		    <label for="username">Usuario</label>
+		    <input type="username" id="username" name="username" placeholder="Usuario" th:value="${usuario.username}" readonly="readonly">
 		    
 		    <label for="password">Contraseña</label>
 		    <input type="password" id="password" name="password" placeholder="Contraseña" th:value="${usuario.password}">
@@ -32,10 +38,10 @@
 		    <label for="secondSurName">Segundo Apellido</label>
 		    <input type="text" id="secondSurName" name="secondSurName" placeholder="S. Apellido" th:value="${usuario.secondSurName}">
 			
-		    <button type="button" id="button-register" class="button-register">Actualizar Información</button>
+		    <button type="button" id="button-update" class="button-update">Actualizar Información</button>
 			<button type="button" id="button-back" class="button-back" onclick="window.location.href='/'">Volver</button>
-			
-			<input type="hidden" name="idUsuario" th:value="${usuario.idUser}">
+			<button type="button" id="button-delete" class="button-delete">Borrar Cuenta</button>
+
 		</form>
 		
 	</div>

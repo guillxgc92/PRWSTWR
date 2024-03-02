@@ -59,7 +59,6 @@ public class UsuarioService implements UserDetailsService{
         );
     }
 	
-	//Hacer update de información de la cuenta del propio usuario
 	@SuppressWarnings("null")
 	@Transactional
 	public Usuario updateUsuario(Usuario usuario) {
@@ -75,6 +74,15 @@ public class UsuarioService implements UserDetailsService{
 	public Usuario getUsuarioById(Long idUser) {
 		
 		return usuarioRepository.findByIdUser(idUser);
+	}
+	
+	@Transactional
+	public void deleteUsuario(long idUser) {
+		try {
+			usuarioRepository.deleteByIdUser(idUser);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
 

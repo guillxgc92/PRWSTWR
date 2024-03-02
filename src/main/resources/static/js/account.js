@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
+	
     var csrfToken = document.querySelector("meta[name='_csrf']").getAttribute("content");
     var csrfHeader = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
 
-    document.querySelector("#button-register").addEventListener("click", function() {
+    document.querySelector("#button-update").addEventListener("click", function() {
         var formData = {
             usertag: document.querySelector("#username").value,
             password: document.querySelector("#password").value,
@@ -20,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function() {
            },
            body: JSON.stringify(formData) 
        };
-
 
         fetch('/updateuser', 
 			requestOptions
@@ -41,11 +41,42 @@ document.addEventListener("DOMContentLoaded", function() {
 				
                 alert("Error en el servidor: "+ errores);
             } else {
-                alert("Cambios realizados con éxito.");
-            }
+                if (registroResult.message && registroResult.message.startsWith("redirect:")) {
+		            const redirectUrl = registroResult.message.substring("redirect:".length);
+		            window.location.href = redirectUrl;
+	        } else {
+	            alert("Cambios realizados con éxito.");
+	        }
+	            }
         })
         .catch(error => {
             console.error("Error en la solicitud fetch:", error.message);
         });
     });
+    
+    
+    document.getElementById("button-delete").addEventListener("click", function() {
+    fetch("/deleteUser", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            [csrfHeader]: csrfToken 
+        	},
+	    })
+	    .then(response => {
+	        if (!response.ok) {
+	           	return response.text().then(errorText => {
+            	throw new Error("Error al borrar la cuenta. " + errorText);
+        		});
+	        }
+	    })
+	    .then(data => {
+	        alert("Tu cuenta se ha borrado con éxito.")
+	        window.location.href = "/";
+	    })
+	    .catch(error => {
+	        console.error("Error:", error.message);
+	        alert("Error al borrar la cuenta :(");
+	    });
+	});
 });

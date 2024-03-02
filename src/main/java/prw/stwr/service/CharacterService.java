@@ -18,4 +18,7 @@ public class CharacterService {
 		
 		return characterRepository.findAll();
 	}
+
+	
+	
 }
