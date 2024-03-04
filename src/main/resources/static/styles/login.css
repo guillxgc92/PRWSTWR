@@ -19,7 +19,7 @@ body {
   	background-size: cover;  
     background-position: center; 
     background-repeat: no-repeat; 
-    background-color: rgb(22, 22, 22);
+    background-color: #3d3d3d;
 }
 
 #h5-login{
@@ -29,7 +29,7 @@ body {
     width: 100%;
     top: 0;
     font-size: xx-large;
-    color: #eee;
+    color: #f6f6f6;
     text-shadow: 2px 2px 3px rgb(29, 29, 29);
     text-align: center;
     text-transform: uppercase;
@@ -43,7 +43,7 @@ body {
     width: 100%;
     top: 0;
     font-size: xx-large;
-    color: #eee;
+    color: #f6f6f6;
     text-shadow: 2px 2px 3px rgb(29, 29, 29);
     text-align: center;
     justify-content: center;
@@ -78,29 +78,29 @@ label {
     display: block;
     margin-bottom: 8px;
     font-size: 14px;
-    color: #eee;
+    color: #f6f6f6;
 }
 
 form div label {
 	font-size: 14px;
-	color: #eee;
+	color: #f6f6f6;
 }
 
 input {
     width: 100%;
     padding: 10px;
     margin-bottom: 16px;
-    border: 1px solid #444;
+    border: 1px solid #5d5d5d;
     border-radius: 4px;
-    background-color: #333;
-    color: #eee;
+    background-color: #3d3d3d;
+    color: #f6f6f6;
 }
 
 button {
     width: 100%;
     padding: 12px;
-    background-color: rgb(64, 128, 128);
-    color: #eee;
+    background-color: #3e849c;
+    color: #f6f6f6;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -109,15 +109,21 @@ button {
 }
 
 button:hover {
-    background-color: #eee;
-    color: rgb(22, 22, 22);
+    background-color: #f6f6f6;
+    color: #3d3d3d;
     -webkit-box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.75);
 	-moz-box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.75);
 	box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.75);
+	transform: scale(1.01);
+}
+
+#btn-login:hover{
+	color: #f6f6f6;
+	background-color: #b0911e;
 }
 
 p {
-	color: #eee;
+	color: #f6f6f6;
     text-decoration: none;
     font-size: 14px;
 }
@@ -128,7 +134,7 @@ p {
 
 a {
 	font-weight: 400;
-    color: #eee;
+    color: #f6f6f6;
     font-weight: 600;
     text-decoration: none;
     font-size: 14px;
@@ -139,7 +145,7 @@ input placeholder{
 }
 
 a:hover {
-    color: rgb(0, 128, 128);
+    color: #3e849c;
     cursor: pointer;
 }
 
@@ -161,3 +167,39 @@ a:hover {
 .button-register{
 	margin-bottom: 1rem;
 }
+
+.button-register:hover{
+	color: #f6f6f6;
+	background-color: #b0911e;
+}
+
+.button-update{
+	margin-bottom: 1rem;
+}
+
+.button-update:hover{
+	color: #f6f6f6;
+	background-color: #b0911e;
+}
+
+.button-back{
+	margin-right: 1rem;
+}
+
+.button-delete:hover {
+	color: #f6f6f6;
+	background-color: #b55e4d;
+}
+
+#cont-btn {
+	text-align: center;
+	justify-content: space-evenly;
+}
+
+#cont-btn button {
+    display: inline-block;
+    right: auto;
+    left: auto;
+    width: 47%;
+}
+

@@ -36,23 +36,27 @@ document.addEventListener("DOMContentLoaded", function() {
 				let errores = "";
 				
 				for(let i = 0; i< registroResult.errores.length; i++){
-					errores += registroResult.errores[i] + '. ';
+					errores += registroResult.errores[i];
 				}
 				
-                alert("Error en el servidor: "+ errores);
-            } else {
+                alert(errores);
+            } 
+            else {
                 if (registroResult.message && registroResult.message.startsWith("redirect:")) {
 		            const redirectUrl = registroResult.message.substring("redirect:".length);
 		            window.location.href = redirectUrl;
-	        } else {
-	            alert("Cambios realizados con éxito.");
-	        }
-	            }
+		        } 
+		        else {
+		            alert("Cambios realizados con éxito.");
+		        }
+			}
         })
         .catch(error => {
             console.error("Error en la solicitud fetch:", error.message);
         });
     });
+    
+    
     
     
     document.getElementById("button-delete").addEventListener("click", function() {

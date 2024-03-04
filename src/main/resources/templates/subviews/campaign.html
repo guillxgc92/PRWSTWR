@@ -18,7 +18,7 @@
 			<h5 id="h5-campaign">NUEVA CAMPAÑA</h5>
 			
 			<label for="campaignName">Nombre de campaña</label>
-            <input type="text" id="campaignName" name="campaignName">
+            <input type="text" id="campaignName" name="campaignName" required>
             
             <label for="galaxy">Galaxia</label>
             <select name="galaxy" id="galaxySelect" required>
@@ -40,7 +40,7 @@
                 <option th:each="territory : ${listaTerritorios}" th:value="${territory.idTerritory}" th:text="${territory.territoryName}"></option>
             </select>
             
-            <button type="button" id="register-campaign">Crear</button>
+            <button type="submit" id="register-campaign">Crear</button>
             <button type="button" id="button-back" class="button-back" onclick="window.location.href='/character-creator'">Volver</button>
             
 		</form>

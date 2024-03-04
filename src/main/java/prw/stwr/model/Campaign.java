@@ -43,6 +43,8 @@ public class Campaign {
 		this.activerow = activerow;
 		this.idUserCampaign = idUserCampaign;
 	}
+	
+	
 
 	public long getIdCampaign() {
 		return idCampaign;

@@ -8,7 +8,7 @@
     <title>PRW.STWR.CharacterCreation</title>
     <link rel="stylesheet" th:href="@{/styles/charactercreator.css}">
     <script th:src="@{/js/jquery-3.6.1.min.js}"></script>
-    
+     <script th:src="@{/js/character.js}"></script>
 </head>
 <body>
 	
@@ -18,7 +18,7 @@
 			<h5 id="h5-character">CREACIÓN DE PERSONAJE</h5>
 			
 			<label for="charName">Nombre de personaje</label>
-            <input type="text" id="charName" name="charName">
+            <input type="text" id="charName" name="charName" required>
             
             <label for="charRace">Raza</label>
             <select name="charRace" id="charRaceSelect" required>
@@ -27,13 +27,9 @@
             
             <label for="charRaceSkill">Skill de Raza</label>
 			<select name="charRaceSkill" id="charRaceSkillSelect" required>
-			    <option th:each="skill : ${listaSkillsRaza}" 
-			            th:value="${skill.idChRaceSkill}" 
-			            th:text="${skill.chRaceSkillName}">
-			    </option>
+			    <option th:each="skill : ${listaSkillRaza}" th:value="${skill.idChRaceSkill}" th:text="${skill.chRaceSkillName}"></option>
 			</select>
 
-            
             <label for="charClass">Clase</label>
 			<select name="charClass" id="charClassSelect" required>
 		        <option th:each="class : ${listaClases}" th:value="${class.idChClass}" th:text="${class.chClassName}"></option>

@@ -21,8 +21,8 @@
             <nav id="nav-menu">
                 <ul id="top-menu">
                     <li sec:authorize="isAuthenticated()"><a th:href="@{/character-creator}">Campaña</a></li>
-                    <li><a href="#">Comunidad</a></li>
-                    <li><a href="#">Información del juego</a></li>
+                    <li><a th:href="@{/community}">Comunidad</a></li>
+                    <li><a th:href="@{/information}">Información del juego</a></li>
                     <li>
 					    <div sec:authorize="isAuthenticated()">
 					        <a th:href="@{/account}" id="btn-login">Cuenta</a>

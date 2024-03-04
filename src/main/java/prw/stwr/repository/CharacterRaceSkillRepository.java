@@ -8,4 +8,5 @@ import prw.stwr.model.CharacterRaceSkill;
 @Repository
 public interface CharacterRaceSkillRepository extends JpaRepository<CharacterRaceSkill, Long> {
 	
+	CharacterRaceSkill findByIdChRaceSkill(long idChRaceSkill);
 }

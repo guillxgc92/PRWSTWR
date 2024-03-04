@@ -22,6 +22,7 @@ public class SecurityConfiguration {
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
 	/*
 	@Bean
     public static BCryptPasswordEncoder  passwordEncoder(){
@@ -42,16 +43,16 @@ public class SecurityConfiguration {
 		http.authorizeHttpRequests((authorize) -> authorize 
 													.requestMatchers("/").permitAll()
 													.requestMatchers("/index").permitAll()
-													.requestMatchers("/video/*").permitAll()
+													.requestMatchers("/video/**").permitAll()
 													.requestMatchers("/js/**").permitAll() 
 													.requestMatchers("/styles/**").permitAll() 
 													.requestMatchers("/img/**").permitAll() 
-													
+													.requestMatchers("/community").permitAll()
+													.requestMatchers("/information").permitAll()
 													.requestMatchers("/login").permitAll() 
 													.requestMatchers("/register").permitAll()
 													.requestMatchers("/registerprocess").permitAll()
 													.requestMatchers("/processLoginForm").permitAll()
-													
 													.anyRequest().authenticated())
 		
 		.httpBasic(withDefaults()).formLogin(form -> form

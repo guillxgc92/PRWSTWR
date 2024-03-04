@@ -3,14 +3,14 @@ document.addEventListener("DOMContentLoaded", function() {
     var csrfToken = document.querySelector("meta[name='_csrf']").getAttribute("content");
     var csrfHeader = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
 	
-    document.querySelector("#register-campaign").addEventListener("submit", function(){
+    document.querySelector("#register-character").addEventListener("submit", function(){
 
         var formData = {
-            campaignName: document.querySelector("#campaignName").value,
-            galaxySelect: document.querySelector("#galaxySelect").value,
-            regionSelect: document.querySelector("#regionSelect").value,
-            planetSelect: document.querySelector("#planetSelect").value,
-            territorySelect: document.querySelector("#territorySelect").value
+            charName: document.querySelector("#charName").value,
+            charRace: document.querySelector("#charRaceSelect").value,
+            charRaceSkill: document.querySelector("#charRaceSkillSelect").value,
+            charClass: document.querySelector("#charClassSelect").value,
+            charClassSkill: document.querySelector("#charClassSkillSelect").value
         }
 
         const requestOptions = {
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
             body: JSON.stringify(formData) 
         };
 
-        fetch('/processFormCampaign',
+        fetch('/processCharacterForm',
             requestOptions
         )
         .then(response => {
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(character => {
             console.log(character);
-            window.location.href = "/";
+            window.location.href = "/campaign";
         })
         .catch(error => {
             console.error("Error en la solicitud fetch:", error.message);

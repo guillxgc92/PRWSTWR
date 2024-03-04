@@ -128,9 +128,15 @@ public class GameCharacter {
 	@Override
 	public String toString() {
 		String string = "{ Nombre de personaje: " + getCharacterName() +
-				"\nRaza: " + getCharacterRace() + "\nSkill de raza: " + getCharacterRaceSkill() +
-				"\nClase: " + getCharacterClassSkill() + "\nSkill de clase: " + getCharacterClassSkill() +
-				"}";
+				"\nRaza: " + getCharacterRace().getCharacterRaceName() + 
+				"\nDescripción de raza: "+ getCharacterRace().getCharacterRaceDescription() +
+				"\nSkill de raza: " + getCharacterRaceSkill().getChRaceSkillName() + 
+				"\nDescripción skill de raza: " + getCharacterRaceSkill().getChRaceSkillDescription() +
+				"\nClase: " + getCharacterClassSkill().getChClassSkillName() + 
+				"\nDescripción de clase: " + getCharacterClass().getChClassDescription() +
+				"\nSkill de clase: " + getCharacterClassSkill().getChClassSkillName() +
+				"\nDescripción skill de clase: " + getCharacterClassSkill().getChClassSkillDescription() +
+				"\n}";
 		return string;
 	}
 }
