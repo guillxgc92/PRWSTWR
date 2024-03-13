@@ -6,7 +6,7 @@
     <meta name="_csrf" th:content="${_csrf.token}" />
     <meta name="_csrf_header" th:content="${_csrf.headerName}" />
     <title>PRW.STWR.Account</title>
-    <link rel="stylesheet" th:href="@{/styles/login.css}">
+    <link rel="stylesheet" th:href="@{./styles/login.css}">
     <script th:src="@{/js/jquery-3.6.1.min.js}"></script>
     <script th:src="@{/js/account.js}"></script>
 </head>
@@ -41,7 +41,7 @@
 		    <button type="button" id="button-update" class="button-update">Actualizar Información</button>
 		    
 		    <div id="cont-btn">
-				<button type="button" id="button-back" class="button-back" onclick="window.location.href='/'">Volver</button>
+				<button type="button" id="button-back" class="button-back" th:onclick="'window.location.href=\'' + @{/index} + '\''">Volver</button>
 				<button type="button" id="button-delete" class="button-delete">Borrar Cuenta</button>
 			</div>
 			

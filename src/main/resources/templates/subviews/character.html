@@ -6,7 +6,7 @@
     <meta name="_csrf" th:content="${_csrf.token}" />
     <meta name="_csrf_header" th:content="${_csrf.headerName}" />
     <title>PRW.STWR.CharacterCreation</title>
-    <link rel="stylesheet" th:href="@{/styles/charactercreator.css}">
+    <link rel="stylesheet" th:href="@{./styles/charactercreator.css}">
     <script th:src="@{/js/jquery-3.6.1.min.js}"></script>
      <script th:src="@{/js/character.js}"></script>
 </head>
@@ -17,8 +17,8 @@
 			
 			<h5 id="h5-character">CREACIÓN DE PERSONAJE</h5>
 			
-			<label for="charName">Nombre de personaje</label>
-            <input type="text" id="charName" name="charName" required>
+			<label for="characterName">Nombre de personaje</label>
+            <input type="text" id="characterName" name="characterName" required>
             
             <label for="charRace">Raza</label>
             <select name="charRace" id="charRaceSelect" required>
@@ -41,7 +41,7 @@
 		 	</select>
 
             <button type="submit" id="register-character">Crear</button>
-            <button type="button" id="button-back" class="button-back" onclick="window.location.href='/'">Volver</button>
+            <button type="button" id="button-back" class="button-back" th:onclick="'window.location.href=\'' + @{/index} + '\''">Volver</button>
 		</form>
 	</div>
 	

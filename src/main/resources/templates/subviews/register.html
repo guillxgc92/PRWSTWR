@@ -6,7 +6,7 @@
     <meta name="_csrf" th:content="${_csrf.token}" />
     <meta name="_csrf_header" th:content="${_csrf.headerName}" />
     <title>PRW.STWR.Register</title>
-    <link rel="stylesheet" th:href="@{/styles/login.css}">
+    <link rel="stylesheet" th:href="@{./styles/login.css}">
     <script th:src="@{/js/jquery-3.6.1.min.js}"></script>
     <script th:src="@{/js/register.js}"></script>
 </head>
@@ -35,7 +35,7 @@
 		    <input type="text" id="secondSurName" name="secondSurName" placeholder="S. Apellido">
 
 		    <button type="button" id="button-register" class="button-register">Registrarse</button>
-			<button type="button" id="button-back" class="button-back" onclick="window.location.href='/login'">Volver</button>
+			<button type="button" id="button-back" class="button-back" th:onclick="'window.location.href=\'' + @{/login} + '\''">Volver</button>
 			
 		</form>
 		

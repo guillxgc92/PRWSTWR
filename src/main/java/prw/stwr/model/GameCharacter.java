@@ -127,15 +127,15 @@ public class GameCharacter {
 	
 	@Override
 	public String toString() {
-		String string = "{ Nombre de personaje: " + getCharacterName() +
-				"\nRaza: " + getCharacterRace().getCharacterRaceName() + 
-				"\nDescripción de raza: "+ getCharacterRace().getCharacterRaceDescription() +
-				"\nSkill de raza: " + getCharacterRaceSkill().getChRaceSkillName() + 
-				"\nDescripción skill de raza: " + getCharacterRaceSkill().getChRaceSkillDescription() +
-				"\nClase: " + getCharacterClassSkill().getChClassSkillName() + 
-				"\nDescripción de clase: " + getCharacterClass().getChClassDescription() +
-				"\nSkill de clase: " + getCharacterClassSkill().getChClassSkillName() +
-				"\nDescripción skill de clase: " + getCharacterClassSkill().getChClassSkillDescription() +
+		String string = "{\n	Nombre de personaje: " + getCharacterName() +
+				"\n	Raza: " + getCharacterRace().getCharacterRaceName() + 
+				"\n 	Descripción de raza: "+ getCharacterRace().getCharacterRaceDescription() +
+				"\n 	Skill de raza: " + getCharacterRaceSkill().getChRaceSkillName() + 
+				"\n 	Descripción skill de raza: " + getCharacterRaceSkill().getChRaceSkillDescription() +
+				"\n 	Clase: " + getCharacterClassSkill().getChClassSkillName() + 
+				"\n 	Descripción de clase: " + getCharacterClass().getChClassDescription() +
+				"\n 	Skill de clase: " + getCharacterClassSkill().getChClassSkillName() +
+				"\n 	Descripción skill de clase: " + getCharacterClassSkill().getChClassSkillDescription() +
 				"\n}";
 		return string;
 	}

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @SessionAttributes({"charRace"})
-public class MainController {
+public class ViewsController {
 
 	@GetMapping(value = {"/", "/index"})
 	public String index() {

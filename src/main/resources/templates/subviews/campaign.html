@@ -6,7 +6,7 @@
     <meta name="_csrf" th:content="${_csrf.token}" />
     <meta name="_csrf_header" th:content="${_csrf.headerName}" />
     <title>PRW.STWR.Campaign</title>
-    <link rel="stylesheet" th:href="@{/styles/campaign.css}">
+    <link rel="stylesheet" th:href="@{./styles/campaign.css}">
     <script th:src="@{/js/jquery-3.6.1.min.js}"></script>
     <script th:src="@{/js/campaign.js}"></script>
 </head>
@@ -41,7 +41,7 @@
             </select>
             
             <button type="submit" id="register-campaign">Crear</button>
-            <button type="button" id="button-back" class="button-back" onclick="window.location.href='/character-creator'">Volver</button>
+            <button type="button" id="button-back" class="button-back" th:onclick="'window.location.href=\'' + @{/character-creator} + '\''">Volver</button>
             
 		</form>
 	</div>

@@ -6,17 +6,18 @@
     <meta name="_csrf" th:content="${_csrf.token}" />
     <meta name="_csrf_header" th:content="${_csrf.headerName}" />
     <title>PRW.STWR.Login</title>
-    <link rel="stylesheet" th:href="@{/styles/login.css}">
-
+    <link rel="stylesheet" th:href="@{./styles/login.css}">
 </head>
 <body>
 	
 	<div id="form-container">
 		
 		<form method="POST" th:action="@{/login}">
+			
 			<h5 id="h5-login">LOGIN</h5>
+			
 			<div th:if="${param.error}" style="display: flex; color: rgb(216, 29, 29); justify-content: center; align-items: center;">
-			    <div class="alert alert-danger" style="margin: auto;">Email o Contraseña no válido/a</div>
+			    <div class="alert alert-danger" style="margin: auto;">Usuario o contraseña no válido/a</div>
 			</div>
 
 		    <label for="username">Usuario</label>
@@ -35,9 +36,8 @@
 		    <a href="#">¿Olvidaste tu contraseña?</a>
 
 		    <p>¿No tienes cuenta? <a th:href="@{/register}" id="btn-register">Regístrate aquí.</a></p>
-		    <button type="button" onclick="window.location.href='/'">Volver</button>
+		    <button type="button" th:onclick="'window.location.href=\'' + @{/index} + '\''">Volver</button>
 	
-		
 	</div>
 	
 </body>

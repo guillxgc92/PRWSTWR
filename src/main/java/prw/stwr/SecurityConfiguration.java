@@ -35,27 +35,17 @@ public class SecurityConfiguration {
         auth.userDetailsService(userDetailsService).passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 	
-	
 	@SuppressWarnings("removal")
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
 		
 		http.authorizeHttpRequests((authorize) -> authorize 
-													.requestMatchers("/").permitAll()
-													.requestMatchers("/index").permitAll()
-													.requestMatchers("/video/**").permitAll()
-													.requestMatchers("/js/**").permitAll() 
-													.requestMatchers("/styles/**").permitAll() 
-													.requestMatchers("/img/**").permitAll() 
-													.requestMatchers("/community").permitAll()
-													.requestMatchers("/information").permitAll()
-													.requestMatchers("/login").permitAll() 
-													.requestMatchers("/register").permitAll()
-													.requestMatchers("/registerprocess").permitAll()
-													.requestMatchers("/processLoginForm").permitAll()
+													.requestMatchers("/", "/index", "/login", "/register", "/community", "/information").permitAll()
+													.requestMatchers("/video/**", "/js/**", "/styles/**", "/img/**").permitAll()
+													.requestMatchers("/registerprocess", "/processLoginForm").permitAll()
 													.anyRequest().authenticated())
 		
-		.httpBasic(withDefaults()).formLogin(form -> form
+			.httpBasic(withDefaults()).formLogin(form -> form
 												     .loginPage("/login") 
 												     .loginProcessingUrl("/login")
 												     .failureUrl("/login?error=true")

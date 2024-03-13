@@ -181,9 +181,8 @@ public class UserController {
 				usuarioActual.setFirstSurName(firstSurName.trim());
 				usuarioActual.setSecondSurName(secondSurName.trim());
 				
-				@SuppressWarnings("unused")
 				Usuario nuevoUsuario = objUsuarioService.updateUsuario(usuarioActual);
-				System.out.println("usuario modificado: " + nuevoUsuario);
+				System.out.println("Usuario modificado: " + nuevoUsuario.getUsername());
 				
 				resultAccount.setUsuario(usuarioActual);
 				

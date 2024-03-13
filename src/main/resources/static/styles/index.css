@@ -119,7 +119,6 @@ video {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    overflow: visible;
     filter: grayscale(70%) blur(1.2px);
 }
 

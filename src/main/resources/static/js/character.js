@@ -1,16 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
-
     var csrfToken = document.querySelector("meta[name='_csrf']").getAttribute("content");
     var csrfHeader = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
-	
-    document.querySelector("#register-character").addEventListener("submit", function(){
+    
+    document.querySelector("#register-character").addEventListener("submit", function(event){
+
+		event.preventDefault(event);
 
         var formData = {
-            charName: document.querySelector("#charName").value,
-            charRace: document.querySelector("#charRaceSelect").value,
-            charRaceSkill: document.querySelector("#charRaceSkillSelect").value,
-            charClass: document.querySelector("#charClassSelect").value,
-            charClassSkill: document.querySelector("#charClassSkillSelect").value
+            characterName: document.querySelector("#characterName").value,
+            characterRace: document.querySelector("#charRaceSelect").value,
+            characterRaceSkill: document.querySelector("#charRaceSkillSelect").value,
+            characterClass: document.querySelector("#charClassSelect").value,
+            characterClassSkill: document.querySelector("#charClassSkillSelect").value
         }
 
         const requestOptions = {
@@ -33,10 +34,12 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(character => {
             console.log(character);
-            window.location.href = "/campaign";
+            setTimeout(function() {
+                window.location.href = "/campaign";
+            }, 5000);
         })
         .catch(error => {
-            console.error("Error en la solicitud fetch:", error.message);
+            console.error("Error en la solicitud fetch:", error);
         });
     });
 });

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -108,30 +109,32 @@ public class CampaignController {
 		return "subviews/character";
 	}
 	
+	//?
+	
 	@PostMapping(value = "/processCharacterForm", produces = "application/json")
 	@ResponseBody
-	public GameCharacter charCreate(@RequestParam(name = "charName") String charName,
-									@RequestParam(name = "charRace") CharacterRace charRace,
-									@RequestParam(name = "charRaceSkill") CharacterRaceSkill charRaceSkill,
-									@RequestParam(name = "charClass") CharacterClass charClass,
-									@RequestParam(name = "charClassSkill") CharacterClassSkill charClassSkill) {
+	public GameCharacter charCreate(@RequestParam(name = "characterName") String characterName,
+									@RequestParam(name = "charRace") CharacterRace characterRace,
+									@RequestParam(name = "charRaceSkill") CharacterRaceSkill characterRaceSkill,
+									@RequestParam(name = "charClass") CharacterClass characterClass,
+									@RequestParam(name = "charClassSkill") CharacterClassSkill characterClassSkill) {
 		
 		GameCharacter gameCharacter = new GameCharacter();
 		try {
 			Pattern characterNameReg = Pattern.compile("[a-zA-ZÀ-ÿ\\u00f1\\u00d1 ]{3,16}|^$");
-			String characterName = charName;
+			String characterNamed = characterName;
 			Matcher matcherCharacterName = characterNameReg.matcher(characterName);
 			
 			if(!matcherCharacterName.matches()) {
 				System.out.println("Nombre de personaje no válido."); //Hay que cambiarlo
 			}
-			else {
+			if(matcherCharacterName.matches()) {
 				gameCharacter.setActiverow(true);
-				gameCharacter.setCharacterName(characterName.trim());
-				gameCharacter.setCharacterRace(charRace);
-				gameCharacter.setCharacterRaceSkill(charRaceSkill);
-				gameCharacter.setCharacterClass(charClass);
-				gameCharacter.setCharacterClassSkill(charClassSkill);
+				gameCharacter.setCharacterName(characterNamed.trim());
+				gameCharacter.setCharacterRace(characterRace);
+				gameCharacter.setCharacterRaceSkill(characterRaceSkill);
+				gameCharacter.setCharacterClass(characterClass);
+				gameCharacter.setCharacterClassSkill(characterClassSkill);
 
 				//Aquí iría el registro del personaje en la bdd
 				System.out.println(gameCharacter.toString());
@@ -139,40 +142,36 @@ public class CampaignController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return gameCharacter;
 	}
 	
-	@PostMapping(value = "/processFormCampaign", produces = "application/json")
+	//NO VA
+	
+	@PostMapping(value = "/processFormCampaign", produces = "application/json", consumes = "application/json")
 	@ResponseBody
-	public CampaignTerritories campCreate(@RequestParam(name = "campaignName") String campaignName,
-										  @RequestParam(name = "galaxy") Galaxy galaxy,
-									      @RequestParam(name = "region") Regions regions,
-									      @RequestParam(name = "planet") Planet planet,
-									      @RequestParam(name = "territory") Territory territory) {
+	public CampaignTerritories campCreate(@RequestBody CampaignTerritories campaignRequest) {
 		
 		CampaignTerritories campaignInfo = new CampaignTerritories();
 		try {
 			Pattern campaignInfoReg = Pattern.compile("[a-zA-ZÀ-ÿ\\u00f1\\u00d1 ]{3,16}|^$");
-			String campaignInfoName = campaignName;
+			String campaignInfoName = campaignRequest.getCampaignName();
 			Matcher matcherCampaignInfo = campaignInfoReg.matcher(campaignInfoName);
 			
 			if (!matcherCampaignInfo.matches()) {
 				System.out.println("Nombre de campaña no válido.");
 			}
-			else {
+			if (matcherCampaignInfo.matches()) {
 				campaignInfo.setActiverow(true);
 				campaignInfo.setIdCampaignAsign(null);
-				campaignInfo.setCampaignName(campaignName);
-				campaignInfo.setIdGalaxy(galaxy);
-				campaignInfo.setIdRegions(regions);
-				campaignInfo.setIdPlanet(planet);
-				campaignInfo.setIdTerritory(territory);
+				campaignInfo.setCampaignName(campaignInfoName);
+				campaignInfo.setIdGalaxy(campaignRequest.getIdGalaxy());
+				campaignInfo.setIdRegions(campaignRequest.getIdRegions());
+				campaignInfo.setIdPlanet(campaignRequest.getIdPlanet());
+				campaignInfo.setIdTerritory(campaignRequest.getIdTerritory());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//Al no hacer una insercion en la tabla no hay nada que leer por lo tanto peta
 		return campaignInfo;
 	}
 }
